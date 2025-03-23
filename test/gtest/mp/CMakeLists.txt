@@ -156,3 +156,10 @@ if(ENABLE_SYCL)
     TEST_NAME mp-tests-sycl-3-only NAME mp-tests-3 NPROC 3 TIMEOUT 500 SYCL
     TARGS --gtest_filter=-${sycl-exclusions})
 endif()
+
+# Game of life
+add_executable(simple simple.cpp)
+if(ENABLE_ISHMEM)
+  target_link_ishmem(simple)
+endif()
+target_link_libraries(simple cxxopts DR::mpi)
